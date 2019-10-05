@@ -4,8 +4,9 @@ import pyautogui
 import time
 import asyncio
 import wx
-from pynput.keyboard import Key, Controller
-# from pynput.mouse import Button, Controller
+import sys
+from pynput.keyboard import Key, Controller, Listener
+from pynput.mouse import Button, Controller
 
 
 
@@ -31,16 +32,16 @@ fishingRegHeight = height / 1.3
 
 keyboard = Controller()
 
-# mouse = Controller()
+mouse = Controller()
 
 async def pressKey(duration) :
-    keyboard.press(Key.space)
-    await asyncio.sleep(duration)
-    keyboard.release
-    # mouse.position = (1649,852)
-    # mouse.press(Button.left)
+    # keyboard.press(Key.space)
     # await asyncio.sleep(duration)
-    # mouse.release
+    # keyboard.release
+    mouse.position = (1649,852)
+    mouse.press(Button.left)
+    await asyncio.sleep(duration)
+    mouse.release
 
 async def generateImage() :
     cv2.rectangle(large_image, (MPxHook,MPyHook),(MPxHook+tcolsHook,MPyHook+trowsHook),(0,0,255),2)
@@ -100,8 +101,8 @@ while(True) :
         # Ceritanya diem
     elif y1Fish > y2Hook : 
         print("Fish is under hook")
-        keyboard.release(Key.space)
-        # mouse.release(Button.left)
+        # keyboard.release(Key.space)
+        mouse.release(Button.left)
         # Ceritanya diem
     else :
         print("Condition Unknown")
